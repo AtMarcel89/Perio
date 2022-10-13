@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Perio Staging and Grading</title>
+</head>
+<body>
+    <h1>Periodontal Staging and Grading Online</h1>
+    <div id="staging"> 
+        <h1>Staging:</h1> 
+        <div id="severity">
+        <h2>Severity</h2>
+            <p><label for="CAL">Clinical attachment level:</label>
+                <select name="CAL" id="CAL-select">
+                    <option value="">--Select CAL--</option>
+                    <option value="low">1-2mm</option>
+                    <option value="medium">3-4mm</option>
+                    <option value="high">5+mm</option>
+                    <option value="maCal">Not available</option>
+                </select>
+            </p>
+            <p><label for="rx-bone-loss">X-ray bone loss (% of root):</label>
+                <select name="RBL" id="TBL-select">
+                    <option value="">--Select RBL--</option>
+                    <option value="low"> &#60;15%</option>
+                    <option value="medium">15-33%</option>
+                    <option value="high">&#60;33%</option>
+                    <option value="maCal">Not available</option>
+                </select>
+            </p>
+            <p><label for="tooth-loss">Perio caused tooth loss:</label>
+                <select name="tooth-loss" id="tooth-loss">
+                    <option value="">--Teeth lost due to periodontitis--</option>
+                    <option value="low"> None</option>
+                    <option value="medium">&#8804;4</option>
+                    <option value="high">&#8805;5</option>
+                </select>
+            </p>
+        </div>
+        <h2>Complexity</h2>
+        <div id="Complexity">
+            <p><label for="max-probing-depth">Max Probing Depth:</label>
+                <select name="tooth-loss" id="tooth-loss">
+                    <option value="low"> &#8804;4mm</option>
+                    <option value="medium">&#8804;5mm</option>
+                    <option value="high">&#8805;6mm</option>
+                </select>
+            </p>
+            <p><label for="type-bl">Type of bone loss:</label>
+                <select name="type-bl" id="type-bl">
+                    <option value="low"> Mostly horizontal</option>
+                    <option value="high">Vertical &#60;3mm </option>
+                </select>
+
+            </p>
+            <form>  <p><b>Additional Information:</b></p>  
+                <input type="checkbox" id="ST3" value="ST3"><label for="Furcation"> Furcation involvment cl II-III</label><br>  
+                <input type="checkbox" id="ST3" value="ST3"><label for="Defect"> Moderate ridge defects</label><br>  
+                <input type="checkbox" id="ST4" value="ST4"><label for="Rehab"> Need for complex rehabilitation</label><br>   
+            </form>
+        </div>
+        <div id="extent">
+            <p><label for="extent">Perio caused tooth loss:</label>
+                <select name="extent" id="extent">
+                    <option value="">--Percentage of teeth involved--</option>
+                    <option value="localized"> &#8804;30%</option>
+                    <option value="generalized">&#8805; 30%</option>
+                    <option value="MI">Molar/Incisor pattern</option>
+                </select>
+        </div>
+    </div>
+    <div id="grading">
+
+    </div>
+    <button>Submit</button>
+    <div id="result">
+
+    </div>
+</body>
