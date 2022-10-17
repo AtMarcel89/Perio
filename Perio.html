@@ -5,39 +5,48 @@
     <style>
         body{
             margin:0;
-            
+            background-color:#1F2937;
+            color:White;
         }
         #staging{
             display:flex;
-            flex-direction: column;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
         }
         #severity{
-            background-color: #2596be;
-            color:white;
-        
+            background-color: white;
+            color:black;
+            padding-left: 50px;
+            padding-right: 50px;
+            gap:30px;
         }
         #Complexity{
-            background-color:#8ad7e7;
+        
             
         }
         #RBL { display:none;
         }
         #TL{display:none;
         }
+        h1{text-align: center;}
+        #main-content{
+            background-color:white;
+            color:black;
+        }
     </style>
 </head>
 <body>
     <h1>Periodontal Staging and Grading Online</h1>
-    <h1>Staging:</h1> 
+    <div id="main-content"><h1>Staging:</h1> 
     <div id="staging"> 
         <div id="severity">
-        <h2>Severity</h2>
+        <h2>Severity (Site of greater loss)</h2>
             <div><label for="CAL">Clinical attachment level:</label>
                 <select name="CAL" id="CAL" onclick="Severity()">
-                    <option value="">--Select CAL--</option>
+                    <option value="">--Interdental CAL--</option>
                     <option value="low">1-2mm</option>
                     <option value="medium">3-4mm</option>
-                    <option value="high">5+mm</option>
+                    <option value="high">&#62;5mm</option>
                     <option value="naCal" >Not available</option>
                 </select>
             </div>
@@ -46,7 +55,7 @@
                     <option value="">--Select RBL %--</option>
                     <option value="low"> &#60;15%</option>
                     <option value="medium">15-33%</option>
-                    <option value="high">&#60;33%</option>
+                    <option value="high">&#62;33%</option>
                     <option value="naRBL" >Not available</option>
                 </select>
             </div>
@@ -92,7 +101,7 @@
         </div>
     </div>
     <div id="grading">
-
+    </div>
     </div>
     <button>Submit</button>
     <div id="result">
