@@ -16,8 +16,6 @@
         #severity{
             background-color: white;
             color:black;
-            padding-left: 50px;
-            padding-right: 50px;
             gap:30px;
         }
         #Complexity{
@@ -91,13 +89,16 @@
             </form>
         </div>
         <div id="extent">
-            <p><label for="extent">Perio caused tooth loss:</label>
+            <h2>Extent and Distribution:</h2>
+            <p><label for="extent">Extent:</label>
                 <select name="extent" id="extent">
                     <option value="">--Percentage of teeth involved--</option>
                     <option value="localized"> &#8804;30%</option>
                     <option value="generalized">&#8805; 30%</option>
-                    <option value="MI">Molar/Incisor pattern</option>
                 </select>
+                <form>  <p><b>Distribution:</b></p>  
+                    <input type="checkbox" id="MI" value="MI"><label for="Molar-incisor"> Molar/Incisor pattern</label><br> 
+                    </form>
         </div>
     </div>
     <div id="grading">
