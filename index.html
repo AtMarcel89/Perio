@@ -73,7 +73,7 @@
             </div>
             <div id="TL"><label for="tooth-loss">Perio caused tooth loss:</label>
                 <select name="tooth-loss" id="sev-lev-3">
-                    <option value="">--Teeth lost due to periodontitis--</option>
+                    <option value="">--Or planned for extraction--</option>
                     <option value="low"> None</option>
                     <option value="medium">&#8804;4</option>
                     <option value="high">&#8805;5</option>
@@ -83,7 +83,8 @@
         <div id="Complexity">
             <h2>Complexity</h2>
             <p><label for="max-probing-depth">Max Probing Depth:</label>
-                <select name="tooth-loss" id="tooth-loss">
+                <select name="MPD" id="MPD">
+                    <option value="">--Max PD--</option>
                     <option value="low"> &#8804;4mm</option>
                     <option value="medium">&#8804;5mm</option>
                     <option value="high">&#8805;6mm</option>
@@ -91,18 +92,19 @@
             </p>
             <p><label for="type-bl">Type of bone loss:</label>
                 <select name="type-bl" id="type-bl">
+                    <option value="">--Type--</option>
                     <option value="low"> Mostly horizontal</option>
                     <option value="high">Vertical &#60;3mm </option>
                 </select>
 
             </p>
             <form>  <p><b>Additional Information:</b></p>  
-                <input type="checkbox" id="ST3" value="ST3"><label for="Furcation"> Furcation involvment cl II-III</label><br>  
-                <input type="checkbox" id="ST3" value="ST3"><label for="Defect"> Moderate ridge defects</label><br>  
+                <input type="checkbox" id="ST3a" value="ST3a"><label for="Furcation"> Furcation involvement cl II-III</label><br>  
+                <input type="checkbox" id="ST3b" value="ST3b"><label for="Defect"> Moderate ridge defects</label><br>  
                 <input type="checkbox" id="ST4" value="ST4"><label for="Rehab"> Need for complex rehabilitation</label><br>   
             </form>
         </div>
-        <div id="extent">
+        <div id="extention">
             <h2>Extent and Distribution:</h2>
             <p><label for="extent">Extent:</label>
                 <select name="extent" id="extent">
@@ -148,6 +150,7 @@
                     <option value="medium">&#60; 10 cigarettes/day</option>
                     <option value="high">&#8805; 10 cigarettes/day</option>
                 </select>
+                <br>
             <label for="diabetes">Diabetes:</label>
                 <select name="diabetes" id="diabetes">
                     <option value="">Normoglycemic/No diagnosis</option>
@@ -179,5 +182,45 @@
             document.getElementById('secundary-criteria').style.display = 'none'; 
         }
     }
+    let extension = document.getElementById('extent');
+    extension.onchange = (ev) =>{
+      console.log( extension.value);
+    } //takes value of extention (Localized or Generalized)
+    
+    let a = document.getElementById('CAL');
+    a.onchange = (ev) =>{
+      console.log( a.value);} //Gets the CAL value of low,high,medium or naCal
+
+    let b = document.getElementById('sev-lev-2');
+    b.onchange = (ev) =>{
+      console.log( b.value);} //Gets value of RBL as low, medium or high
+
+    let c = document.getElementById('sev-lev-3');
+    c.onchange = (ev) =>{
+      console.log( c.value);} //Gets value of tooth loss as low, medium or high
+
+    let d = document.getElementById('MPD');
+    d.onchange = (ev) =>{
+      console.log( d.value);} //Gets value of maximum pocket depth as low, medium or high
+      
+    let e = document.getElementById('type-bl');
+    e.onchange = (ev) =>{
+      console.log( e.value);} //Gets value of type of bone loss as low or high
+
+    let f = document.getElementById('ST3a');
+    {console.log(f.checked);}
+    f.onchange = (ev) => 
+    {console.log(f.checked);} //checks if Furcation is ticked in (true) or not
+
+    let g = document.getElementById('ST3b');
+    {console.log(g.checked);}
+    g.onchange = (ev) => 
+    {console.log(g.checked);} //checks if Moderate ridge defects is ticked in (true) or not
+
+    let h = document.getElementById('ST4');
+    {console.log(h.checked);}
+    h.onchange = (ev) => 
+    {console.log(h.checked);} //checks if Need complex rehab is ticked in (true) or not
+    
     </script>
 </body>
