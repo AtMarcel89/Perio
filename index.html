@@ -55,7 +55,7 @@
         <div id="severity">
         <h2>Severity (Site of greater loss)</h2>
             <div><label for="CAL">Clinical attachment level:</label>
-                <select name="CAL" id="CAL" onclick="Severity()">
+                <select name="CAL" id="CAL" onclick="Severity()" >
                     <option value="">--Interdental CAL--</option>
                     <option value="low">1-2mm</option>
                     <option value="medium">3-4mm</option>
@@ -83,7 +83,7 @@
         <div id="Complexity">
             <h2>Complexity</h2>
             <p><label for="max-probing-depth">Max Probing Depth:</label>
-                <select name="MPD" id="MPD">
+                <select name="MaxProDep" id="MaxPD">
                     <option value="">--Max PD--</option>
                     <option value="low"> &#8804;4mm</option>
                     <option value="medium">&#8804;5mm</option>
@@ -94,12 +94,12 @@
                 <select name="type-bl" id="type-bl">
                     <option value="">--Type--</option>
                     <option value="low"> Mostly horizontal</option>
-                    <option value="high">Vertical &#60;3mm </option>
+                    <option value="high">Vertical &#8805;3mm </option>
                 </select>
 
             </p>
             <form>  <p><b>Additional Information:</b></p>  
-                <input type="checkbox" id="ST3a" value="ST3a"><label for="Furcation"> Furcation involvement cl II-III</label><br>  
+                <input type="checkbox" id="ST3a" value="Furcation"><label for="ST3a"> Furcation involvement cl II-III</label><br>  
                 <input type="checkbox" id="ST3b" value="ST3b"><label for="Defect"> Moderate ridge defects</label><br>  
                 <input type="checkbox" id="ST4" value="ST4"><label for="Rehab"> Need for complex rehabilitation</label><br>   
             </form>
@@ -162,7 +162,7 @@
     </div>    
 </div>
     </div>
-    <button>Submit</button>
+    <button id="debug">Submit</button>
     <div id="result">
 
     </div>
@@ -189,38 +189,65 @@
     
     let a = document.getElementById('CAL');
     a.onchange = (ev) =>{
-      console.log( a.value);} //Gets the CAL value of low,high,medium or naCal
+      a= (a.value);} //Gets the CAL value of low,high,medium or naCal
 
     let b = document.getElementById('sev-lev-2');
     b.onchange = (ev) =>{
-      console.log( b.value);} //Gets value of RBL as low, medium or high
+      b=( b.value);} //Gets value of RBL as low, medium or high
 
     let c = document.getElementById('sev-lev-3');
     c.onchange = (ev) =>{
-      console.log( c.value);} //Gets value of tooth loss as low, medium or high
+      c=( c.value);} //Gets value of tooth loss as low, medium or high
 
-    let d = document.getElementById('MPD');
+    let d = document.getElementById('MaxPD');
     d.onchange = (ev) =>{
-      console.log( d.value);} //Gets value of maximum pocket depth as low, medium or high
+      d=( d.value);} //Gets value of maximum pocket depth as low, medium or high
       
     let e = document.getElementById('type-bl');
     e.onchange = (ev) =>{
-      console.log( e.value);} //Gets value of type of bone loss as low or high
+      e=( e.value);} //Gets value of type of bone loss as low or high
 
     let f = document.getElementById('ST3a');
     {console.log(f.checked);}
     f.onchange = (ev) => 
-    {console.log(f.checked);} //checks if Furcation is ticked in (true) or not
+    {f=(f.checked);} //checks if Furcation is ticked in (true) or not
 
     let g = document.getElementById('ST3b');
     {console.log(g.checked);}
     g.onchange = (ev) => 
-    {console.log(g.checked);} //checks if Moderate ridge defects is ticked in (true) or not
+    {g=(g.checked);} //checks if Moderate ridge defects is ticked in (true) or not
 
     let h = document.getElementById('ST4');
     {console.log(h.checked);}
     h.onchange = (ev) => 
-    {console.log(h.checked);} //checks if Need complex rehab is ticked in (true) or not
+    {h=(h.checked);} //checks if Need complex rehab is ticked in (true) or not
+
+    function deb(){
+        if (a==="low"){console.log ("I")}
+    }
     
+    function de(){
+        console.log(fg)    
+    }
+    
+    document.getElementById("debug").addEventListener("click", debug);
+
+    function debg (){
+    if ((a=="low" || b=="low")&& c=="low" && d=="low"&& e=="low" && f!=true && g!=true && h!=true )  {console.log ('I')}
+    else if (ab == "low" && c =="low" && d == "medium" && e == "low" && fg=="false" && h == "false" ) {console.log ("II")}
+    else if (ab == "medium" && c =="low" && (d == "low"|| d =="medium") && e == "low" && fg=="false" && h == "false") {console.log ("II")}
+    else if (ab == "medium" && ((c== "medium" || "high") ||(d=="high")||(e=="high")||(fg=="true"))) {console.log ("III")}
+    else if (ab == "high" &&  (c!= "high" || h!="true")) {console.log ("III")}
+    else if (ab =="high" && d== "high" && e=="high" && fg=="true" && h == "true") {console.log ("IV")}
+    else {console.log("")}    
+    }
+
+    function debug(){
+        if ((a=="low" || b=="low")&& c=="low" && d=="medium"&& e=="low" && f!=true && g!=true && h!=true )  {console.log ('II')}
+        
+        else {console.log ("")}
+    }
+    
+    if ((a=="low" || b=="low")&& c=="low" && d=="low"&& e=="low" && f!=true )  {console.log ('I')}
     </script>
 </body>
