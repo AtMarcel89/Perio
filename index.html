@@ -46,6 +46,12 @@
             flex-wrap: wrap;
             padding:30px;
        }
+       #Fur{
+            display:none;
+       }
+       #Def{
+            display:none;
+       }
     </style>
 </head>
 <body>
@@ -56,7 +62,7 @@
         <h2>Severity (Site of greater loss)</h2>
             <div><label for="CAL">Clinical attachment level:</label>
                 <select name="CAL" id="CAL" onclick="Severity()" >
-                    <option value="">--Interdental CAL--</option>
+                    <option value="" selected disabled hidden>--Interdental CAL--</option>
                     <option value="low">1-2mm</option>
                     <option value="medium">3-4mm</option>
                     <option value="high">&#62;5mm</option>
@@ -64,8 +70,8 @@
                 </select>
             </div>
             <div id="RBL"   ><label for="rx-bone-loss">Radiographic bone loss (% of root):</label>
-                <select name="RBL" id="sev-lev-2" onclick="Severity2()">
-                    <option value="">--Select RBL %--</option>
+                <select name="RBL" id="sev-lev-2">
+                    <option value="" disabled selected hidden>--Select RBL %--</option>
                     <option value="low"> &#60;15%</option>
                     <option value="medium">15-33%</option>
                     <option value="high">&#62;33%</option>
@@ -73,7 +79,7 @@
             </div>
             <div id="TL"><label for="tooth-loss">Perio caused tooth loss:</label>
                 <select name="tooth-loss" id="sev-lev-3">
-                    <option value="">--Or planned for extraction--</option>
+                    <option value=""disabled selected hidden>--Or planned for extraction--</option>
                     <option value="low"> None</option>
                     <option value="medium">&#8804;4</option>
                     <option value="high">&#8805;5</option>
@@ -83,8 +89,8 @@
         <div id="Complexity">
             <h2>Complexity</h2>
             <p><label for="max-probing-depth">Max Probing Depth:</label>
-                <select name="MaxProDep" id="MaxPD">
-                    <option value="">--Max PD--</option>
+                <select name="MaxProDep" id="MaxPD" onclick="StageII()">
+                    <option value="" disabled selected hidden>--Max PD--</option>
                     <option value="low"> &#8804;4mm</option>
                     <option value="medium">&#8804;5mm</option>
                     <option value="high">&#8805;6mm</option>
@@ -92,16 +98,16 @@
             </p>
             <p><label for="type-bl">Type of bone loss:</label>
                 <select name="type-bl" id="type-bl">
-                    <option value="">--Type--</option>
+                    <option value="" disabled selected hidden>--Type--</option>
                     <option value="low"> Mostly horizontal</option>
                     <option value="high">Vertical &#8805;3mm </option>
                 </select>
 
             </p>
             <form>  <p><b>Additional Information:</b></p>  
-                <input type="checkbox" id="ST3a" value="Furcation"><label for="ST3a"> Furcation involvement cl II-III</label><br>  
-                <input type="checkbox" id="ST3b" value="ST3b"><label for="Defect"> Moderate ridge defects</label><br>  
-                <input type="checkbox" id="ST4" value="ST4"><label for="Rehab"> Need for complex rehabilitation</label><br>   
+                <div id="Fur"><input type="checkbox" id="ST3a" value="Furcation"><label for="ST3a"> Furcation involvement cl II-III</label><br> </div> 
+                <div id="Def"><input type="checkbox" id="ST3b" value="ST3b"><label for="Defect"> Moderate ridge defects</label><br></div>  
+                <div id="Reh"><input type="checkbox" id="ST4" value="ST4"><label for="Rehab"> Need for complex rehabilitation</label><br></div>   
             </form>
         </div>
         <div id="extention">
@@ -182,72 +188,85 @@
             document.getElementById('secundary-criteria').style.display = 'none'; 
         }
     }
+    function StageII() {
+        if((document.getElementById('MaxPD').value != 'low') && (document.getElementById('type-bl').value != 'low') ){
+            document.getElementById('Fur').style.display='inline'; 
+            document.getElementById('Def').style.display='inline';
+        } else {
+            document.getElementById('Fur').style.display = 'none';
+            document.getElementById('Def').style.display = 'none';
+    }
+    }
+
+
     let extension = document.getElementById('extent');
     extension.onchange = (ev) =>{
       console.log( extension.value);
     } //takes value of extention (Localized or Generalized)
     
-    let a = document.getElementById('CAL');
-    a.onchange = (ev) =>{
-      a= (a.value);} //Gets the CAL value of low,high,medium or naCal
+    document.addEventListener.onchange
 
-    let b = document.getElementById('sev-lev-2');
-    b.onchange = (ev) =>{
-      b=( b.value);} //Gets value of RBL as low, medium or high
-
-    let c = document.getElementById('sev-lev-3');
-    c.onchange = (ev) =>{
-      c=( c.value);} //Gets value of tooth loss as low, medium or high
-
-    let d = document.getElementById('MaxPD');
-    d.onchange = (ev) =>{
-      d=( d.value);} //Gets value of maximum pocket depth as low, medium or high
-      
-    let e = document.getElementById('type-bl');
-    e.onchange = (ev) =>{
-      e=( e.value);} //Gets value of type of bone loss as low or high
-
-    let f = document.getElementById('ST3a');
-    {console.log(f.checked);}
-    f.onchange = (ev) => 
-    {f=(f.checked);} //checks if Furcation is ticked in (true) or not
-
-    let g = document.getElementById('ST3b');
-    {console.log(g.checked);}
-    g.onchange = (ev) => 
-    {g=(g.checked);} //checks if Moderate ridge defects is ticked in (true) or not
-
-    let h = document.getElementById('ST4');
-    {console.log(h.checked);}
-    h.onchange = (ev) => 
-    {h=(h.checked);} //checks if Need complex rehab is ticked in (true) or not
-
-    function deb(){
-        if (a==="low"){console.log ("I")}
-    }
+    const CAL = document.getElementById('CAL');
+    let a
+        CAL.onchange = (ev) => {
+        a = ev.target.value;
+        console.log(a)
+        } //Gets value of CAL as low, medium or high
     
-    function de(){
-        console.log(fg)    
-    }
-    
-    document.getElementById("debug").addEventListener("click", debug);
+    const RBL = document.getElementById('sev-lev-2');
+    let b
+        RBL.onchange = (ev) => {
+        b = ev.target.value;
+        console.log(b)
+        } //Gets value of RBL as low, medium or high
 
-    function debg (){
-    if ((a=="low" || b=="low")&& c=="low" && d=="low"&& e=="low" && f!=true && g!=true && h!=true )  {console.log ('I')}
-    else if (ab == "low" && c =="low" && d == "medium" && e == "low" && fg=="false" && h == "false" ) {console.log ("II")}
-    else if (ab == "medium" && c =="low" && (d == "low"|| d =="medium") && e == "low" && fg=="false" && h == "false") {console.log ("II")}
-    else if (ab == "medium" && ((c== "medium" || "high") ||(d=="high")||(e=="high")||(fg=="true"))) {console.log ("III")}
-    else if (ab == "high" &&  (c!= "high" || h!="true")) {console.log ("III")}
-    else if (ab =="high" && d== "high" && e=="high" && fg=="true" && h == "true") {console.log ("IV")}
-    else {console.log("")}    
-    }
+    const TL = document.getElementById('sev-lev-3');
+    let c
+        TL.onchange = (ev) => {
+        c = ev.target.value;
+        console.log(c)
+        } //Gets value of tooth loss as low, medium or high
+
+    const MaxPD = document.getElementById('MaxPD');
+    let d
+        MaxPD.onchange = (ev) => {
+        d = ev.target.value;
+        console.log(d)
+        } //Gets value of maximum pocket depth as low, medium or high
+    
+    const BL = document.getElementById('type-bl');
+    let e
+        BL.onchange = (ev) => {
+        e = ev.target.value;
+        console.log(e)
+        }  //Gets value of type of bone loss as low or high
+    
+    const Furc =  document.getElementById('ST3a');
+    let f
+        Furc.onchange = (ev) => {
+            f = ev.target.checked
+        } //checks if Furcation is ticked in (true) or not
+    
+    const RiDe =  document.getElementById('ST3b');
+    let g
+        RiDe.onchange = (ev) => {
+            g = ev.target.checked
+        } //checks if Moderate ridge defects is ticked in (true) or not
+
+    const ComplReh =  document.getElementById('ST4');
+    let h
+        ComplReh.onchange = (ev) => {
+            h = ev.target.checked
+        } //checks if Need complex rehab is ticked in (true) or not
 
     function debug(){
-        if ((a=="low" || b=="low")&& c=="low" && d=="medium"&& e=="low" && f!=true && g!=true && h!=true )  {console.log ('II')}
-        
-        else {console.log ("")}
+        if ((a=="low" || b=="low")&& c=="low" && d=="low" && e=="low" && f!=true && g!=true && h!=true) {console.log ('I')}
+        else if ((a=="low" || b=="low")&& c=="low" && d=="medium" && e=="low" && f!=true && g!=true && h!=true) {console.log ('II')}
+        else if ((a=="medium" || b=="medium")&& c=="low" && (d == "low"|| d =="medium") && e=="low" && f!=true && g!=true && h!=true) {console.log ('II')}
+        else if ((a=="medium" || b=="medium")&& (c== "medium" || "high") && d =="high" && e=="high" && f==true && g==true && h!=true) {console.log ('III')}
+        else if ((a=="high" || b=="high")&& (c!= "high") && h!=true) {console.log ('III')}
+        else if ((a=="high" || b=="high")&& d =="high" && e=="high" && f==true && g==true && h==true) {console.log ('IV')}
+        else {console.log("")}
     }
-    
-    if ((a=="low" || b=="low")&& c=="low" && d=="low"&& e=="low" && f!=true )  {console.log ('I')}
     </script>
 </body>
