@@ -97,7 +97,7 @@
                 </select>
             </p>
             <p><label for="type-bl">Type of bone loss:</label>
-                <select name="type-bl" id="type-bl">
+                <select name="type-bl" id="type-bl" onclick="StageII()">
                     <option value="" disabled selected hidden>--Type--</option>
                     <option value="low"> Mostly horizontal</option>
                     <option value="high">Vertical &#8805;3mm </option>
@@ -189,7 +189,7 @@
         }
     }
     function StageII() {
-        if((document.getElementById('MaxPD').value != 'low') && (document.getElementById('type-bl').value != 'low') ){
+        if((document.getElementById('MaxPD').value == 'medium'|| document.getElementById('MaxPD').value=='high') && (document.getElementById('type-bl').value == 'high')){
             document.getElementById('Fur').style.display='inline'; 
             document.getElementById('Def').style.display='inline';
         } else {
@@ -197,7 +197,6 @@
             document.getElementById('Def').style.display = 'none';
     }
     }
-
 
     let extension = document.getElementById('extent');
     extension.onchange = (ev) =>{
