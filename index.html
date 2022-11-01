@@ -52,6 +52,12 @@
        #Def{
             display:none;
        }
+       #AddInf {
+            display:none;
+       }
+       #Reh{
+            display:none;
+       }
     </style>
 </head>
 <body>
@@ -104,9 +110,9 @@
                 </select>
 
             </p>
-            <form>  <p><b>Additional Information:</b></p>  
-                <div id="Fur"><input type="checkbox" id="ST3a" value="Furcation"><label for="ST3a"> Furcation involvement cl II-III</label><br> </div> 
-                <div id="Def"><input type="checkbox" id="ST3b" value="ST3b"><label for="Defect"> Moderate ridge defects</label><br></div>  
+            <form>  <div id="AddInf"><p><b>Additional Information:</b></p></div>  
+                <div id="Fur"><input type="checkbox" id="ST3a" value="Furcation" onclick="StageIII()"><label for="ST3a"> Furcation involvement cl II-III</label><br> </div> 
+                <div id="Def"><input type="checkbox" id="ST3b" value="ST3b" onclick="StageIII()"><label for="Defect"> Moderate ridge defects</label><br></div>  
                 <div id="Reh"><input type="checkbox" id="ST4" value="ST4"><label for="Rehab"> Need for complex rehabilitation</label><br></div>   
             </form>
         </div>
@@ -168,7 +174,7 @@
     </div>    
 </div>
     </div>
-    <button id="debug">Submit</button>
+    <button id="debug" onclick="debug()">Submit</button>
     <div id="result">
 
     </div>
@@ -190,11 +196,19 @@
     }
     function StageII() {
         if((document.getElementById('MaxPD').value == 'medium'|| document.getElementById('MaxPD').value=='high') && (document.getElementById('type-bl').value == 'high')){
+            document.getElementById('AddInf').style.display='inline';
             document.getElementById('Fur').style.display='inline'; 
             document.getElementById('Def').style.display='inline';
         } else {
             document.getElementById('Fur').style.display = 'none';
             document.getElementById('Def').style.display = 'none';
+    }
+    }
+    function StageIII(){
+        if (document.getElementById('ST3a').checked===true && document.getElementById('ST3b').checked===true){
+            document.getElementById('Reh').style.display='inline'; 
+        } else {
+            document.getElementById('Reh').style.display = 'none';
     }
     }
 
@@ -262,8 +276,10 @@
         if ((a=="low" || b=="low")&& c=="low" && d=="low" && e=="low" && f!=true && g!=true && h!=true) {console.log ('I')}
         else if ((a=="low" || b=="low")&& c=="low" && d=="medium" && e=="low" && f!=true && g!=true && h!=true) {console.log ('II')}
         else if ((a=="medium" || b=="medium")&& c=="low" && (d == "low"|| d =="medium") && e=="low" && f!=true && g!=true && h!=true) {console.log ('II')}
-        else if ((a=="medium" || b=="medium")&& (c== "medium" || "high") && d =="high" && e=="high" && f==true && g==true && h!=true) {console.log ('III')}
-        else if ((a=="high" || b=="high")&& (c!= "high") && h!=true) {console.log ('III')}
+        //else if ((a=="medium" || b=="medium")&& (c== "medium" || "high") && d =="high" && e=="high" && f==true && g==true && h!=true) {console.log ('III')}
+        //else if ((a=="high" || b=="high")&& (c!= "high") && h!=true) {console.log ('III')}
+        //else if ((a=="high" || b=="high")&& d =="high" && e=="high" && f==true && g==true && h!=true) {console.log ('III')}
+        else if (())
         else if ((a=="high" || b=="high")&& d =="high" && e=="high" && f==true && g==true && h==true) {console.log ('IV')}
         else {console.log("")}
     }
