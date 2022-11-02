@@ -17,11 +17,6 @@
         #severity{
             background-color: white;
             color:black;
-            gap:30px;
-        }
-        #Complexity{
-        
-            
         }
         #RBL { display:none;
         }
@@ -46,17 +41,12 @@
             flex-wrap: wrap;
             padding:30px;
        }
-       #Fur{
+       #Compl-expl{
             display:none;
        }
-       #Def{
-            display:none;
-       }
-       #AddInf {
-            display:none;
-       }
-       #Reh{
-            display:none;
+       #answer{
+            display:flex;
+            justify-content: space-evenly;
        }
     </style>
 </head>
@@ -95,7 +85,7 @@
         <div id="Complexity">
             <h2>Complexity</h2>
             <p><label for="max-probing-depth">Max Probing Depth:</label>
-                <select name="MaxProDep" id="MaxPD" onclick="StageII()">
+                <select name="MaxProDep" id="MaxPD" >
                     <option value="" disabled selected hidden>--Max PD--</option>
                     <option value="low"> &#8804;4mm</option>
                     <option value="medium">&#8804;5mm</option>
@@ -103,7 +93,7 @@
                 </select>
             </p>
             <p><label for="type-bl">Type of bone loss:</label>
-                <select name="type-bl" id="type-bl" onclick="StageII()">
+                <select name="type-bl" id="type-bl" >
                     <option value="" disabled selected hidden>--Type--</option>
                     <option value="low"> Mostly horizontal</option>
                     <option value="high">Vertical &#8805;3mm </option>
@@ -111,9 +101,25 @@
 
             </p>
             <form>  <div id="AddInf"><p><b>Additional Information:</b></p></div>  
-                <div id="Fur"><input type="checkbox" id="ST3a" value="Furcation" onclick="StageIII()"><label for="ST3a"> Furcation involvement cl II-III</label><br> </div> 
-                <div id="Def"><input type="checkbox" id="ST3b" value="ST3b" onclick="StageIII()"><label for="Defect"> Moderate ridge defects</label><br></div>  
-                <div id="Reh"><input type="checkbox" id="ST4" value="ST4"><label for="Rehab"> Need for complex rehabilitation</label><br></div>   
+
+                <p><label for="Furc">Furcation involvement</label>
+                    <select name="FurcInv" id="ST3a" >
+                        <option value="" disabled selected hidden>--Type--</option>
+                        <option value="low"> None to Gr I</option>
+                        <option value="medium"> Gr II </option>
+                        <option value="high"> Gr III </option>
+                    </select>
+                <div id="Def"><input type="checkbox" id="ST3b" value="ST3b" ><label for="Defect"> Moderate ridge defects</label><br></div>  
+                <div id="Reh"><input type="checkbox" id="ST4" value="ST4" onclick="RehabExpl()"> <label for="Rehab"> Need of complex rehabilitation</label><br>
+                <div id="Compl-expl"><ul><b>Due to:</b>
+                    <li>Masticatory dysfunction</li>
+                    <li>Secondary occlusal trauma <br> (tooth mobility degree ≥2)</li>
+                    <li>Severe ridge defects</li>
+                    <li>Bite collapse, drifting, flaring</li>
+                    <li> &#60; 20 remaining teeth </li>
+                </ul>
+                </div>
+                </div>   
             </form>
         </div>
         <div id="extention">
@@ -127,6 +133,13 @@
                 <form>  <p><b>Distribution:</b></p>  
                     <input type="checkbox" id="MI" value="MI"><label for="Molar-incisor"> Molar/Incisor pattern</label><br> 
                     </form>
+        </div>
+        <div id="answer">
+            <button id="debug" onclick="debug()">Submit</button> <br>
+            <p>Periodontitis Stage I</p>
+            <p>Periodontitis Stage II</p>
+            <p>Periodontitis Stage III</p>
+            <p>Periodontitis Stage IV</p>
         </div>
     </div>
     <div id="grading"><h1>Grading:</h1>
@@ -174,7 +187,7 @@
     </div>    
 </div>
     </div>
-    <button id="debug" onclick="debug()">Submit</button>
+    
     <div id="result">
 
     </div>
@@ -194,22 +207,13 @@
             document.getElementById('secundary-criteria').style.display = 'none'; 
         }
     }
-    function StageII() {
-        if((document.getElementById('MaxPD').value == 'medium'|| document.getElementById('MaxPD').value=='high') && (document.getElementById('type-bl').value == 'high')){
-            document.getElementById('AddInf').style.display='inline';
-            document.getElementById('Fur').style.display='inline'; 
-            document.getElementById('Def').style.display='inline';
-        } else {
-            document.getElementById('Fur').style.display = 'none';
-            document.getElementById('Def').style.display = 'none';
-    }
-    }
-    function StageIII(){
-        if (document.getElementById('ST3a').checked===true && document.getElementById('ST3b').checked===true){
-            document.getElementById('Reh').style.display='inline'; 
-        } else {
-            document.getElementById('Reh').style.display = 'none';
-    }
+    function RehabExpl(){
+        if (document.getElementById('ST4').checked == true)
+        {    document.getElementById('Compl-expl').style.display='block';
+        }
+        else {
+            document.getElementById('Compl-expl').style.display='none' 
+        }
     }
 
     let extension = document.getElementById('extent');
@@ -257,8 +261,9 @@
     const Furc =  document.getElementById('ST3a');
     let f
         Furc.onchange = (ev) => {
-            f = ev.target.checked
-        } //checks if Furcation is ticked in (true) or not
+        f = ev.target.value;
+        console.log(f)
+        } //Gets Value of furcation as low, medium or high
     
     const RiDe =  document.getElementById('ST3b');
     let g
@@ -272,16 +277,14 @@
             h = ev.target.checked
         } //checks if Need complex rehab is ticked in (true) or not
 
+    let stage
     function debug(){
-        if ((a=="low" || b=="low")&& c=="low" && d=="low" && e=="low" && f!=true && g!=true && h!=true) {console.log ('I')}
-        else if ((a=="low" || b=="low")&& c=="low" && d=="medium" && e=="low" && f!=true && g!=true && h!=true) {console.log ('II')}
-        else if ((a=="medium" || b=="medium")&& c=="low" && (d == "low"|| d =="medium") && e=="low" && f!=true && g!=true && h!=true) {console.log ('II')}
-        //else if ((a=="medium" || b=="medium")&& (c== "medium" || "high") && d =="high" && e=="high" && f==true && g==true && h!=true) {console.log ('III')}
-        //else if ((a=="high" || b=="high")&& (c!= "high") && h!=true) {console.log ('III')}
-        //else if ((a=="high" || b=="high")&& d =="high" && e=="high" && f==true && g==true && h!=true) {console.log ('III')}
-        else if (())
-        else if ((a=="high" || b=="high")&& d =="high" && e=="high" && f==true && g==true && h==true) {console.log ('IV')}
-        else {console.log("")}
+        if ((a=="low" || b=="low")&& c=="low" && d=="low" && e=="low" && f=="low" && g!=true && h!=true) {stage='I'}
+        else if ((a=="low" || b=="low")&& c=="low" && d=="medium" && e=="low" && f=="low" && g!=true && h!=true) {stage='II'}
+        else if ((c=="medium"||d=="high"||e=="high" || f=="medium"||g==true)&& (c!="high" && f!="high" && h!=true)) {stage='III'}
+        else if ((c=="high"||f=="high"||h==true))  {stage='IV'}
+        else if ((a==undefined||b==undefined) ||c==undefined ||d==undefined ||e==undefined ||f==undefined ){alert("Please fill all the boxes")}
+        else {stage="II"}
     }
     </script>
 </body>
