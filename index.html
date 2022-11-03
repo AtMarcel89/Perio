@@ -7,12 +7,13 @@
             margin:0;
             background-color:#1F2937;
             color:White;
+            
         }
         #staging{
             display:flex;
             justify-content: space-evenly;
             flex-wrap: wrap;
-            padding:30px;
+            
         }
         #severity{
             background-color: white;
@@ -22,7 +23,7 @@
         }
         h1{text-align: center;
             margin:0px;
-            padding:30px;
+            
         }
         #main-content{
             background-color:white;
@@ -39,14 +40,26 @@
             display:flex;
             justify-content: space-evenly;
             flex-wrap: wrap;
-            padding:30px;
+            
        }
        #Compl-expl{
             display:none;
        }
        #answer{
             display:flex;
-            justify-content: space-evenly;
+            justify-content: center; 
+            background-color: #1F2937;
+            color:white;
+            width:30vw;
+            height:8vw;
+            margin: 2vw auto;
+            border-radius: 20px;
+       }
+       #debug{
+        width:30%;
+        height:40%;
+        border-radius:20px;
+        
        }
     </style>
 </head>
@@ -134,13 +147,10 @@
                     <input type="checkbox" id="MI" value="MI"><label for="Molar-incisor"> Molar/Incisor pattern</label><br> 
                     </form>
         </div>
-        <div id="answer">
-            <button id="debug" onclick="debug()">Submit</button> <br>
-            <p>Periodontitis Stage I</p>
-            <p>Periodontitis Stage II</p>
-            <p>Periodontitis Stage III</p>
-            <p>Periodontitis Stage IV</p>
-        </div>
+    </div>
+    <div id="answer">
+        <button id="debug" onclick="debug()">Submit</button> 
+        <p id="stageDef"></p>
     </div>
     <div id="grading"><h1>Grading:</h1>
         <div id="sub-grading">
@@ -279,12 +289,12 @@
 
     let stage
     function debug(){
-        if ((a=="low" || b=="low")&& c=="low" && d=="low" && e=="low" && f=="low" && g!=true && h!=true) {stage='I'}
-        else if ((a=="low" || b=="low")&& c=="low" && d=="medium" && e=="low" && f=="low" && g!=true && h!=true) {stage='II'}
-        else if ((c=="medium"||d=="high"||e=="high" || f=="medium"||g==true)&& (c!="high" && f!="high" && h!=true)) {stage='III'}
-        else if ((c=="high"||f=="high"||h==true))  {stage='IV'}
+        if ((a=="low" || b=="low")&& c=="low" && d=="low" && e=="low" && f=="low" && g!=true && h!=true) {document.getElementById('stageDef').innerHTML = "Periodontitis Stage I"}
+        else if ((a=="low" || b=="low")&& c=="low" && d=="medium" && e=="low" && f=="low" && g!=true && h!=true) {document.getElementById('stageDef').innerHTML = "Periodontitis Stage II"}
+        else if ((c=="medium"||d=="high"||e=="high" || f=="medium"||g==true)&& (c!="high" && f!="high" && h!=true)) {document.getElementById('stageDef').innerHTML = "Periodontitis Stage III"}
+        else if ((c=="high"||f=="high"||h==true))  {document.getElementById('stageDef').innerHTML = "Periodontitis Stage IV"}
         else if ((a==undefined||b==undefined) ||c==undefined ||d==undefined ||e==undefined ||f==undefined ){alert("Please fill all the boxes")}
-        else {stage="II"}
+        else {document.getElementById('stageDef').innerHTML = "Periodontitis Stage II"}
     }
     </script>
 </body>
