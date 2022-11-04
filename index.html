@@ -7,13 +7,12 @@
             margin:0;
             background-color:#1F2937;
             color:White;
-            
         }
         #staging{
             display:flex;
             justify-content: space-evenly;
             flex-wrap: wrap;
-            
+            padding-bottom:20px;
         }
         #severity{
             background-color: white;
@@ -23,8 +22,8 @@
         #RBL { display:none;
         }
         h1{text-align: center;
-            margin:0px;
-            
+            padding:20px;
+            margin:0;
         }
         #main-content{
             background-color:white;
@@ -45,16 +44,17 @@
        }
        #Compl-expl{
             display:none;
+            font-size: 16px;
        }
        #answer{
             display:flex;
             justify-content: center; 
-            color: #1F2937;
+            color: white;
             width:100vw;
             height:8vh;
             border-radius: 20px;
             align-items: center;
-            max-width: 40%;
+            max-width: 80%;
             font-size: 1.5em; 
             margin-right:auto;
             margin-left:auto;
@@ -69,6 +69,15 @@
         font-size : 100%;
         border-color: #1F2937;
        }
+    @media screen and (max-width: 768px) {
+        body {background-color: brown;}
+        #staging{
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+    }
+}
     </style>
 </head>
 <body>
@@ -156,32 +165,38 @@
                     </form>
         </div>
     </div>
-    <div id="answer">
-        <button id="debug" onclick="debug()" >Submit</button> 
-        <p id="stageDef"></p>
-    </div>
     <div id="grading"><h1>Grading:</h1>
         <div id="sub-grading">
         <div id="primary-criteria"> <h2>Primary Criteria:</h2>
             <label for="RBL-CAL">Radiographic Bone Loss or CAL:</label>
                 <select name="RBL-CAL" id="RBL-CAL" onclick="Progression()">
-                    <option value="">--None over 5 years--</option>
+                    <option value="" disabled selected hidden>--Select One--</option>
+                    <option value="low">None over 5 years</option>
                     <option value="medium">&#60;2mm over 5 years</option>
                     <option value="high">&#8805;2mm over 5 years</option>
                     <option value="NoRBL-CAL">Not available</option>
                 </select>
         
         <div id=secundary-criteria>
-        <form oninput="result.value=parseInt(a.value)/parseInt(b.value)">
+        <div id="BLAGE"><form oninput="result.value=parseInt(a.value)/parseInt(b.value)">
             <label for="%BL">Percentage Bone Loss/ Age:</label>
-            <input type="number" id="a" name="%BL" min="0" max="100" maxlength="3" /> /
-            <input type="number" id="b" name="age" min="0" max="110" maxlength="3" /> =
+            <input type="number" id="a" name="%BL" min="0" max="100" maxlength="3" placeholder="BL %"/> /
+            <input type="number" id="b" name="age" min="0" max="110" maxlength="3" placeholder="Age" /> =
             <output name="result" for="a b">--Result--</output>
           </form>
+          <label for="BlA">Result:</label>
+          <select name="BlA" id="BlAge">  
+            <option value="" disabled selected hidden>--Select based on calculation--</option>
+            <option value="low">&#60;0,25</option>
+            <option value="medium">0,25-1,0</option>
+            <option value="high">&#62;1,0</option>
+        </select>
+        </div>
         <label for="phenotype">Case Phenotype</label>
                 <select name="phenotype" id="phenotype">
-                    <option value="">Destruction commensurated to biofilm deposits</option>
-                    <option value="low">High biofilm deposits, low destruction</option>
+                    <option value="" disabled selected hidden>--Destruction vs Biofilm--</option>
+                    <option value="low">Low destruction compared to biofilm deposits</option>
+                    <option value="medium">Destruction commensurated to biofilm deposits</option>
                     <option value="high">Destruction exceeding expectations based on biofilm deposits</option>
                 </select>
             </div>
@@ -189,6 +204,7 @@
         <div id="grade-mod"><h2>Grade Modifiers:</h2>
             <label for="smoke">Smoking:</label>
                 <select name="smoke" id="smoke">
+                    <option value="" disabled selected hidden>--Smoking? Cig/d--</option>
                     <option value="low">Non smoker</option>
                     <option value="medium">&#60; 10 cigarettes/day</option>
                     <option value="high">&#8805; 10 cigarettes/day</option>
@@ -196,8 +212,9 @@
                 <br>
             <label for="diabetes">Diabetes:</label>
                 <select name="diabetes" id="diabetes">
-                    <option value="">Normoglycemic/No diagnosis</option>
-                    <option value="low">HbA1C &#60;7% in patients with diabetes </option>
+                    <option value="" disabled selected hidden>--Diabetes? HbA1C?--</option>
+                    <option value="low">Normoglycemic/No diagnosis</option>
+                    <option value="medium">HbA1C &#60;7% in patients with diabetes </option>
                     <option value="high">HbA1C &#8805; 7% in patients with diabetes</option>
                 </select>  
             </div>
@@ -205,10 +222,11 @@
     </div>    
 </div>
     </div>
-    
-    <div id="result">
-
+    <div id="answer">
+        <button id="debug" onclick="grade();debug()" >Submit</button> 
+        <p id="stageDef"></p>
     </div>
+
 
     <script>
     function Severity() {
@@ -306,8 +324,43 @@
     function MolIn(){
         if (i==true){i2="."}
         else {i2=' with Molar Incisor pattern.'}
-    }
-    //Have to fix Molar incisor pattern, not working
+    }//Adds Molar incisor pattern, if selected
+
+    const RblCal = document.getElementById('RBL-CAL');
+    let ag
+        RblCal.onchange = (ev) => {
+        ag = ev.target.value;
+        console.log(ag)
+        } //Gets value of Rx BL/CAL as low, medium or high
+    
+    const BLAge = document.getElementById('BlAge');
+    let bg
+        BLAge.onchange = (ev) => {
+        bg = ev.target.value;
+        console.log(bg)
+        } //Gets value of bone loss/age as a number
+
+    const Pheno = document.getElementById('phenotype');
+    let cg
+        Pheno.onchange = (ev) => {
+        cg = ev.target.value;
+        console.log(cg)
+        } //Gets value of phenotype (destruction vs biofilm) as low, medium or high
+
+    const Cigar = document.getElementById('smoke');
+    let dg
+        Cigar.onchange = (ev) => {
+        dg = ev.target.value;
+        console.log(dg)
+        } //Gets value of phenotype (destruction vs biofilm) as low, medium or high
+
+    const Diab = document.getElementById('diabetes');
+    let eg
+        Diab.onchange = (ev) => {
+        eg = ev.target.value;
+        console.log(eg)
+        } //Gets value of phenotype (destruction vs biofilm) as low, medium or high
+
 
     function debug(){
         if ((a=="low" || b=="low")&& c=="low" && d=="low" && e=="low" && f=="low" && g!=true && h!=true) 
@@ -317,11 +370,20 @@
         else if ((c=="medium"||d=="high"||e=="high" || f=="medium"||g==true)&& (c!="high" && f!="high" && h!=true)) 
             {document.getElementById('stageDef').innerHTML = extens+" "+"Periodontitis Stage III"+i2}
         else if ((c=="high"||f=="high"||h==true))  
-            {document.getElementById('stageDef').innerHTML = extens+" "+"Periodontitis Stage IV"+i2}
+            {document.getElementById('stageDef').innerHTML = extens+" "+"Periodontitis Stage IV"+Grade+i2}
         else if ((a==undefined||b==undefined) ||c==undefined ||d==undefined ||e==undefined ||f==undefined || extens==undefined  )
             {alert("Please fill all the boxes")}
         else 
             {document.getElementById('stageDef').innerHTML =extens+" "+ "Periodontitis Stage II"+i2}
+    }
+    let Grade=""
+    function grade(){
+        if ((ag=="low" || bg=="low"||cg=="low")&& dg=="low" && eg=="low"){Grade=" Grade A"}
+        else if ((ag=="low" || bg=="low"||cg=="low")&& ((dg=="medium" || dg=="high") || (eg=="medium" || eg=="high"))){Grade=" Grade B"}
+        else if ((ag=="medium" || bg=="medium"||cg=="medium")&& ((dg=="low" || dg=="medium")&& (eg=="low" || eg=="medium"))){Grade=" Grade B"}
+        else if ((ag=="medium" || bg=="medium"||cg=="medium")&& dg=="high" || eg=="high"){Grade=" Grade C"}
+        else if ((ag=="high" || bg=="high"||cg=="high")){Grade=" Grade C"}
+        else  {Grade="" }
     }
     </script>
 </body>
