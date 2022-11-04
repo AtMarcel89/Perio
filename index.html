@@ -310,12 +310,18 @@
     //Have to fix Molar incisor pattern, not working
 
     function debug(){
-        if ((a=="low" || b=="low")&& c=="low" && d=="low" && e=="low" && f=="low" && g!=true && h!=true) {document.getElementById('stageDef').innerHTML = extens+" "+"Periodontitis Stage I"+i2}
-        else if ((a=="low" || b=="low")&& c=="low" && d=="medium" && e=="low" && f=="low" && g!=true && h!=true) {document.getElementById('stageDef').innerHTML =extens+" "+ "Periodontitis Stage II"+i2}
-        else if ((c=="medium"||d=="high"||e=="high" || f=="medium"||g==true)&& (c!="high" && f!="high" && h!=true)) {document.getElementById('stageDef').innerHTML = extens+" "+"Periodontitis Stage III"+i2}
-        else if ((c=="high"||f=="high"||h==true))  {document.getElementById('stageDef').innerHTML = extens+" "+"Periodontitis Stage IV"+i2}
-        else if ((a==undefined||b==undefined) ||c==undefined ||d==undefined ||e==undefined ||f==undefined || extens==undefined  ){alert("Please fill all the boxes")}
-        else {document.getElementById('stageDef').innerHTML =extens+" "+ "Periodontitis Stage II"+i2}
+        if ((a=="low" || b=="low")&& c=="low" && d=="low" && e=="low" && f=="low" && g!=true && h!=true) 
+            {document.getElementById('stageDef').innerHTML = extens+" "+"Periodontitis Stage I"+i2}
+        else if ((a=="low" || b=="low")&& c=="low" && d=="medium" && e=="low" && f=="low" && g!=true && h!=true) 
+            {document.getElementById('stageDef').innerHTML =extens+" "+ "Periodontitis Stage II"+i2}
+        else if ((c=="medium"||d=="high"||e=="high" || f=="medium"||g==true)&& (c!="high" && f!="high" && h!=true)) 
+            {document.getElementById('stageDef').innerHTML = extens+" "+"Periodontitis Stage III"+i2}
+        else if ((c=="high"||f=="high"||h==true))  
+            {document.getElementById('stageDef').innerHTML = extens+" "+"Periodontitis Stage IV"+i2}
+        else if ((a==undefined||b==undefined) ||c==undefined ||d==undefined ||e==undefined ||f==undefined || extens==undefined  )
+            {alert("Please fill all the boxes")}
+        else 
+            {document.getElementById('stageDef').innerHTML =extens+" "+ "Periodontitis Stage II"+i2}
     }
     </script>
 </body>
