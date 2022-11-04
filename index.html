@@ -145,19 +145,19 @@
         </div>
         <div id="extention">
             <h2>Extent and Distribution:</h2>
-            <p><label for="extent">Extent:</label>
-                <select name="extent" id="extent">
+            <p><label for="extent"><b>Extent:</b></label><br><br>
+                <select name="extent" id="extent" >
                     <option value="" disabled selected hidden>--Percentage of teeth involved--</option>
                     <option value="Localized "> &#8804;30%</option>
                     <option value="Generalized">&#8805; 30%</option>
                 </select>
                 <form>  <p><b>Distribution:</b></p>  
-                    <input type="checkbox" id="MI" value="MI"><label for="Molar-incisor"> Molar/Incisor pattern</label><br> 
+                    <input type="checkbox" id="MI" value="MI" onclick="MolIn()"><label for="Molar-incisor"> Molar/Incisor pattern</label><br> 
                     </form>
         </div>
     </div>
     <div id="answer">
-        <button id="debug" onclick="debug()">Submit</button> 
+        <button id="debug" onclick="debug()" >Submit</button> 
         <p id="stageDef"></p>
     </div>
     <div id="grading"><h1>Grading:</h1>
@@ -233,14 +233,6 @@
             document.getElementById('Compl-expl').style.display='none' 
         }
     }
-
-    const extent = document.getElementById('extent')
-    let extens = " "
-        extent.onchange = (ev) =>{
-            extens= ev.target.value;
-        }
- //takes value of extention (Localized or Generalized)
-    
     document.addEventListener.onchange
 
     const CAL = document.getElementById('CAL');
@@ -297,14 +289,33 @@
             h = ev.target.checked
         } //checks if Need complex rehab is ticked in (true) or not
 
-    let stage
+    const extent = document.getElementById('extent')
+    let extens = " "
+        extent.onchange = (ev) =>{
+            extens= ev.target.value;
+        } //takes value of extention (Localized or Generalized)
+    
+    const MIP = document.getElementById('MI')
+    let i 
+    MIP.onchange = (ev) => {
+        i= ev.target.checked
+        }
+
+    
+    let i2 = "."
+    function MolIn(){
+        if (i==true){i2="."}
+        else {i2=' with Molar Incisor pattern.'}
+    }
+    //Have to fix Molar incisor pattern, not working
+
     function debug(){
-        if ((a=="low" || b=="low")&& c=="low" && d=="low" && e=="low" && f=="low" && g!=true && h!=true) {document.getElementById('stageDef').innerHTML = extens+" "+"Periodontitis Stage I"}
-        else if ((a=="low" || b=="low")&& c=="low" && d=="medium" && e=="low" && f=="low" && g!=true && h!=true) {document.getElementById('stageDef').innerHTML =extens+" "+ "Periodontitis Stage II"}
-        else if ((c=="medium"||d=="high"||e=="high" || f=="medium"||g==true)&& (c!="high" && f!="high" && h!=true)) {document.getElementById('stageDef').innerHTML = extens+" "+"Periodontitis Stage III"}
-        else if ((c=="high"||f=="high"||h==true))  {document.getElementById('stageDef').innerHTML = extens+" "+"Periodontitis Stage IV"}
+        if ((a=="low" || b=="low")&& c=="low" && d=="low" && e=="low" && f=="low" && g!=true && h!=true) {document.getElementById('stageDef').innerHTML = extens+" "+"Periodontitis Stage I"+i2}
+        else if ((a=="low" || b=="low")&& c=="low" && d=="medium" && e=="low" && f=="low" && g!=true && h!=true) {document.getElementById('stageDef').innerHTML =extens+" "+ "Periodontitis Stage II"+i2}
+        else if ((c=="medium"||d=="high"||e=="high" || f=="medium"||g==true)&& (c!="high" && f!="high" && h!=true)) {document.getElementById('stageDef').innerHTML = extens+" "+"Periodontitis Stage III"+i2}
+        else if ((c=="high"||f=="high"||h==true))  {document.getElementById('stageDef').innerHTML = extens+" "+"Periodontitis Stage IV"+i2}
         else if ((a==undefined||b==undefined) ||c==undefined ||d==undefined ||e==undefined ||f==undefined || extens==undefined  ){alert("Please fill all the boxes")}
-        else {document.getElementById('stageDef').innerHTML =extens+" "+ "Periodontitis Stage II"}
+        else {document.getElementById('stageDef').innerHTML =extens+" "+ "Periodontitis Stage II"+i2}
     }
     </script>
 </body>
