@@ -50,7 +50,7 @@
             display:flex;
             justify-content: center; 
             color: #1F2937;
-            width:25vw;
+            width:100vw;
             height:8vh;
             border-radius: 20px;
             align-items: center;
@@ -147,9 +147,9 @@
             <h2>Extent and Distribution:</h2>
             <p><label for="extent">Extent:</label>
                 <select name="extent" id="extent">
-                    <option value="">--Percentage of teeth involved--</option>
-                    <option value="localized"> &#8804;30%</option>
-                    <option value="generalized">&#8805; 30%</option>
+                    <option value="" disabled selected hidden>--Percentage of teeth involved--</option>
+                    <option value="Localized "> &#8804;30%</option>
+                    <option value="Generalized">&#8805; 30%</option>
                 </select>
                 <form>  <p><b>Distribution:</b></p>  
                     <input type="checkbox" id="MI" value="MI"><label for="Molar-incisor"> Molar/Incisor pattern</label><br> 
@@ -234,10 +234,12 @@
         }
     }
 
-    let extension = document.getElementById('extent');
-    extension.onchange = (ev) =>{
-      console.log( extension.value);
-    } //takes value of extention (Localized or Generalized)
+    const extent = document.getElementById('extent')
+    let extens = " "
+        extent.onchange = (ev) =>{
+            extens= ev.target.value;
+        }
+ //takes value of extention (Localized or Generalized)
     
     document.addEventListener.onchange
 
@@ -297,12 +299,12 @@
 
     let stage
     function debug(){
-        if ((a=="low" || b=="low")&& c=="low" && d=="low" && e=="low" && f=="low" && g!=true && h!=true) {document.getElementById('stageDef').innerHTML = "Periodontitis Stage I"}
-        else if ((a=="low" || b=="low")&& c=="low" && d=="medium" && e=="low" && f=="low" && g!=true && h!=true) {document.getElementById('stageDef').innerHTML = "Periodontitis Stage II"}
-        else if ((c=="medium"||d=="high"||e=="high" || f=="medium"||g==true)&& (c!="high" && f!="high" && h!=true)) {document.getElementById('stageDef').innerHTML = "Periodontitis Stage III"}
-        else if ((c=="high"||f=="high"||h==true))  {document.getElementById('stageDef').innerHTML = "Periodontitis Stage IV"}
-        else if ((a==undefined||b==undefined) ||c==undefined ||d==undefined ||e==undefined ||f==undefined ){alert("Please fill all the boxes")}
-        else {document.getElementById('stageDef').innerHTML = "Periodontitis Stage II"}
+        if ((a=="low" || b=="low")&& c=="low" && d=="low" && e=="low" && f=="low" && g!=true && h!=true) {document.getElementById('stageDef').innerHTML = extens+" "+"Periodontitis Stage I"}
+        else if ((a=="low" || b=="low")&& c=="low" && d=="medium" && e=="low" && f=="low" && g!=true && h!=true) {document.getElementById('stageDef').innerHTML =extens+" "+ "Periodontitis Stage II"}
+        else if ((c=="medium"||d=="high"||e=="high" || f=="medium"||g==true)&& (c!="high" && f!="high" && h!=true)) {document.getElementById('stageDef').innerHTML = extens+" "+"Periodontitis Stage III"}
+        else if ((c=="high"||f=="high"||h==true))  {document.getElementById('stageDef').innerHTML = extens+" "+"Periodontitis Stage IV"}
+        else if ((a==undefined||b==undefined) ||c==undefined ||d==undefined ||e==undefined ||f==undefined || extens==undefined  ){alert("Please fill all the boxes")}
+        else {document.getElementById('stageDef').innerHTML =extens+" "+ "Periodontitis Stage II"}
     }
     </script>
 </body>
