@@ -7,6 +7,7 @@
             margin:0;
             background-color:#1F2937;
             color:White;
+            font-size:2em;
         }
         #staging{
             display:flex;
@@ -17,7 +18,10 @@
         #severity{
             background-color: white;
             color:black;
-            justify-content: space-evenly;
+            display:flex;
+            flex-direction: column;
+            flex-wrap:wrap;
+            align-items: center;
         }
         #RBL { display:none;
         }
@@ -25,9 +29,19 @@
             padding:20px;
             margin:0;
         }
+        h2{
+            text-align:center;
+        }
         #main-content{
             background-color:white;
             color:black;
+        }
+        select{
+            font-size: 1em;
+            max-width:50vw;
+        }
+        input{
+            font-size: 1em;
         }
        #secundary-criteria{
             display:none;
@@ -69,15 +83,6 @@
         font-size : 100%;
         border-color: #1F2937;
        }
-    @media screen and (max-width: 768px) {
-        body {background-color: brown;}
-        #staging{
-            display:flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-    }
-}
     </style>
 </head>
 <body>
@@ -168,7 +173,7 @@
     <div id="grading"><h1>Grading:</h1>
         <div id="sub-grading">
         <div id="primary-criteria"> <h2>Primary Criteria:</h2>
-            <label for="RBL-CAL">Radiographic Bone Loss or CAL:</label>
+            <label for="RBL-CAL">Radiographic Bone Loss or CAL:</label><br>
                 <select name="RBL-CAL" id="RBL-CAL" onclick="Progression()">
                     <option value="" disabled selected hidden>--Select One--</option>
                     <option value="low">None over 5 years</option>
@@ -179,7 +184,7 @@
         
         <div id=secundary-criteria>
         <div id="BLAGE"><form oninput="result.value=parseInt(a.value)/parseInt(b.value)">
-            <label for="%BL">Percentage Bone Loss/ Age:</label>
+            <label for="%BL">Percentage Bone Loss/ Age:</label><br>
             <input type="number" id="a" name="%BL" min="0" max="100" maxlength="3" placeholder="BL %"/> /
             <input type="number" id="b" name="age" min="0" max="110" maxlength="3" placeholder="Age" /> =
             <output name="result" for="a b">--Result--</output>
@@ -192,7 +197,7 @@
             <option value="high">&#62;1,0</option>
         </select>
         </div>
-        <label for="phenotype">Case Phenotype</label>
+        <label for="phenotype">Case Phenotype</label><br>
                 <select name="phenotype" id="phenotype">
                     <option value="" disabled selected hidden>--Destruction vs Biofilm--</option>
                     <option value="low">Low destruction compared to biofilm deposits</option>
