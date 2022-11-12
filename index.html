@@ -58,22 +58,22 @@
        }
        #Compl-expl{
             display:none;
-            font-size: 16px;
+            font-size: 0.5em;
        }
        #answer{
             display:flex;
             justify-content: center; 
-            color: white;
+            background-color:white;
+            color:black;
             width:100vw;
             height:8vh;
-            border-radius: 20px;
             align-items: center;
-            max-width: 80%;
+            max-width: 100%;
             font-size: 1.5em; 
             margin-right:auto;
             margin-left:auto;
             margin-top: 0.83em ; 
-            margin-bottom: 0.83em ;
+            margin-bottom: 0em ;
        }
        #debug{
         width:auto;
@@ -369,17 +369,17 @@
 
     function debug(){
         if ((a=="low" || b=="low")&& c=="low" && d=="low" && e=="low" && f=="low" && g!=true && h!=true) 
-            {document.getElementById('stageDef').innerHTML = extens+" "+"Periodontitis Stage I"+i2}
+            {document.getElementById('stageDef').innerHTML = extens+" "+"Periodontitis Stage I"+Grade+i2}
         else if ((a=="low" || b=="low")&& c=="low" && d=="medium" && e=="low" && f=="low" && g!=true && h!=true) 
-            {document.getElementById('stageDef').innerHTML =extens+" "+ "Periodontitis Stage II"+i2}
+            {document.getElementById('stageDef').innerHTML =extens+" "+ "Periodontitis Stage II"+Grade+i2}
         else if ((c=="medium"||d=="high"||e=="high" || f=="medium"||g==true)&& (c!="high" && f!="high" && h!=true)) 
-            {document.getElementById('stageDef').innerHTML = extens+" "+"Periodontitis Stage III"+i2}
+            {document.getElementById('stageDef').innerHTML = extens+" "+"Periodontitis Stage III"+Grade+i2}
         else if ((c=="high"||f=="high"||h==true))  
             {document.getElementById('stageDef').innerHTML = extens+" "+"Periodontitis Stage IV"+Grade+i2}
         else if ((a==undefined||b==undefined) ||c==undefined ||d==undefined ||e==undefined ||f==undefined || extens==undefined  )
             {alert("Please fill all the boxes")}
         else 
-            {document.getElementById('stageDef').innerHTML =extens+" "+ "Periodontitis Stage II"+i2}
+            {document.getElementById('stageDef').innerHTML =extens+" "+ "Periodontitis Stage II"+Grade+i2}
     }
     let Grade=""
     function grade(){
