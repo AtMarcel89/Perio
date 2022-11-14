@@ -8,9 +8,11 @@
             background-color:#1F2937;
             color:White;
             font-size:2em;
+            line-height: 2em;
         }
         #staging{
             display:flex;
+            flex-direction: column;
             justify-content: space-evenly;
             flex-wrap: wrap;
             padding-bottom:20px;
@@ -18,6 +20,18 @@
         #severity{
             background-color: white;
             color:black;
+            display:flex;
+            flex-direction: column;
+            flex-wrap:wrap;
+            align-items: center;
+        }
+        #Complexity{
+            display:flex;
+            flex-direction: column;
+            flex-wrap:wrap;
+            align-items: center;
+        }
+        #extention{
             display:flex;
             flex-direction: column;
             flex-wrap:wrap;
@@ -76,13 +90,34 @@
             margin-bottom: 0.83em ;
        }
        #debug{
-        width:auto;
-        height:auto;
-        border-radius:20px;
-        margin:10px;
-        font-size : 100%;
-        border-color: #1F2937;
+            width:auto;
+            height:auto;
+            border-radius:20px;
+            margin:10px;
+            font-size : 100%;
+            border-color: #1F2937;
        }
+        p{  
+            row-gap:10px;
+            margin-block-start: 0em;
+            margin-block-end: 0em;
+            text-align: center;
+            border-width: 3px;
+        }
+       @media only screen and (min-width: 768px) {
+        /* For desktop: */
+        #Compl-expl{
+            display:none;
+            font-size: 0.8em;
+        }
+        #staging{
+            display:flex;
+            flex-direction:row;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+            padding-bottom:20px;
+        }
+        }
     </style>
 </head>
 <body>
@@ -90,7 +125,7 @@
     <div id="main-content"><h1>Staging:</h1> 
     <div id="staging"> 
         <div id="severity">
-        <h2>Severity (Site of greater loss)</h2>
+        <h2>Severity <br>(Site of greater loss)</h2>
             <div><label for="CAL">Clinical attachment level:</label>
                 <select name="CAL" id="CAL" onclick="Severity()" >
                     <option value="" selected disabled hidden>--Interdental CAL--</option>
@@ -154,12 +189,13 @@
                     <li> &#60; 20 remaining teeth </li>
                 </ul>
                 </div>
+            
                 </div>   
             </form>
         </div>
         <div id="extention">
             <h2>Extent and Distribution:</h2>
-            <p><label for="extent"><b>Extent:</b></label><br><br>
+            <p><label for="extent"><b>Extent:</b></label><br>
                 <select name="extent" id="extent" >
                     <option value="" disabled selected hidden>--Percentage of teeth involved--</option>
                     <option value="Localized "> &#8804;30%</option>
