@@ -412,7 +412,7 @@
             {document.getElementById('stageDef').innerHTML = extens+" "+"Periodontitis Stage III"+Grade+i2}
         else if ((c=="high"||f=="high"||h==true))  
             {document.getElementById('stageDef').innerHTML = extens+" "+"Periodontitis Stage IV"+Grade+i2}
-        else if ((a==undefined||b==undefined) ||c==undefined ||d==undefined ||e==undefined ||f==undefined || extens==undefined  )
+        else if ((a==undefined && b==undefined) ||c==undefined ||d==undefined ||e==undefined ||f==undefined || extens==undefined  )
             {alert("Please fill all the boxes")}
         else 
             {document.getElementById('stageDef').innerHTML =extens+" "+ "Periodontitis Stage II"+Grade+i2}
