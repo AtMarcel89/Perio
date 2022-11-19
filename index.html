@@ -87,7 +87,7 @@
             margin-right:auto;
             margin-left:auto;
             margin-top: 0.83em ; 
-            margin-bottom: 0.83em ;
+            margin-bottom: 0em ;
        }
        #debug{
             width:auto;
@@ -104,6 +104,9 @@
             text-align: center;
             border-width: 3px;
         }
+        footer{
+            font-size: 0.4em;
+        }
        @media only screen and (min-width: 768px) {
         /* For desktop: */
         #Compl-expl{
@@ -116,6 +119,9 @@
             justify-content: space-evenly;
             flex-wrap: wrap;
             padding-bottom:20px;
+        }
+        footer{
+            font-size: 0.5em;
         }
         }
     </style>
@@ -267,6 +273,11 @@
         <button id="debug" onclick="grade();debug()" >Submit</button> 
         <p id="stageDef"></p>
     </div>
+<footer>
+    <p>
+        Copyright © 2022 Marcel Bisegna, marcel89@hotmail.it
+    </p>
+</footer>
 
 
     <script>
